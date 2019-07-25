@@ -9,10 +9,10 @@
 // it from being updated in the future.
 
 
-package org.usfirst.frc3668..subsystems;
+package org.usfirst.frc3668.subsystems;
 
 
-import org.usfirst.frc3668..commands.*;
+import org.usfirst.frc3668.commands.*;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.PIDOutput;

@@ -9,9 +9,12 @@
 // it from being updated in the future.
 
 
-package org.usfirst.frc3668.MyRobot;
+package org.usfirst.frc3668;
 
-import org.usfirst.frc3668.MyRobot.commands.*;
+import org.usfirst.frc3668.commands.*;
+
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 

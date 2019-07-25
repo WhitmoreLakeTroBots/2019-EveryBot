@@ -9,7 +9,7 @@
 // it from being updated in the future.
 
 
-package org.usfirst.frc3668.MyRobot;
+package org.usfirst.frc3668;
 
 import edu.wpi.first.wpilibj.RobotBase;
 
@@ -19,7 +19,7 @@ import edu.wpi.first.wpilibj.RobotBase;
  * change the parameter class to the startRobot call.
  */
 public final class Main {
-  private Main() {
+  public Main() {
   }
 
   /**

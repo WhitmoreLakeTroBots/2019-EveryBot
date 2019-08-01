@@ -11,14 +11,17 @@
 
 package org.usfirst.frc3668;
 
+import org.usfirst.frc3668.commands.AutonomousCommand;
+import org.usfirst.frc3668.subsystems.CargoFLip;
+import org.usfirst.frc3668.subsystems.Chasis;
+import org.usfirst.frc3668.subsystems.Intake;
+import org.usfirst.frc3668.subsystems.Pneumatics;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc3668.commands.*;
-import org.usfirst.frc3668.subsystems.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -29,6 +32,7 @@ import org.usfirst.frc3668.subsystems.*;
  */
 public class Robot extends TimedRobot {
 
+    public static boolean isDriveInverted = false;
     Command autonomousCommand;
     SendableChooser<Command> chooser = new SendableChooser<>();
 

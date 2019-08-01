@@ -5,10 +5,10 @@ import org.usfirst.frc3668.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class teleopCommand extends Command {
+public class TeleopCommand extends Command {
 
-    public cmdTeleopDrive() {
-        requires(Robot.subChassis);
+    public TeleopCommand() {
+        requires(Robot.chasis);
     }
 
     // Called just before this Command runs the first time
@@ -19,9 +19,8 @@ public class teleopCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        Robot.subChassis.Drive(Robot.oi.joyDrive);
-        //System.err.println("Front Lift Encoder: " + Robot.subLift.getLiftEncoderTics() + " Lift Encoder Meters: " + Robot.subLift.getLiftEncoderMeters() + " Tail Angle: " + Robot.subTail.getTailAngle());
-        //System.err.println(String.format("Heading: %1$.3f\t llAngle: %2$.3f", Robot.subChassis.getNormaliziedNavxAngle(), Robot.ltx.getDouble(Settings.ltDefaultAngle)));
+        Robot.chasis.Drive(Robot.oi.joyDrive);
+        
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -33,7 +32,7 @@ public class teleopCommand extends Command {
     // Called once after isFinished returns true
     @Override
     protected void end() {
-        Robot.subChassis.DriveMan(0, 0);
+        Robot.chasis.DriveMan(0, 0);
         
     }
 
@@ -41,6 +40,6 @@ public class teleopCommand extends Command {
     // subsystems is scheduled to run
     @Override
     protected void interrupted() {
-        Robot.subChassis.DriveMan(0, 0);
+        Robot.chasis.DriveMan(0, 0);
     }
 }

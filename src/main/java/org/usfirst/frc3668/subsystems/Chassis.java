@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 
 
-public class Chasis extends Subsystem {
+public class Chassis extends Subsystem {
 
 
     public static PowerDistributionPanel PDP;
@@ -40,7 +40,7 @@ public class Chasis extends Subsystem {
 	public final double chassisBeltReduction = 1.0/1.0;
     
 
-    public Chasis() {
+    public Chassis() {
         
         PDP = new PowerDistributionPanel(0);
         addChild("PDP",PDP);
@@ -48,31 +48,31 @@ public class Chasis extends Subsystem {
         
         leftDrive1 = new TalonSRX(leftDrive1CanID);
         leftDrive1.setNeutralMode(NeutralMode.Brake);
-		leftDrive1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, Chasis.talonTimeOut);
-		leftDrive1.configPeakCurrentLimit(Chasis.chassisDriveMaxCurrentLimit, Chasis.talonTimeOut);
-		leftDrive1.configPeakCurrentDuration(Chasis.chassisDriveMaxCurrentTimeout, Chasis.talonTimeOut);
+		leftDrive1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, Chassis.talonTimeOut);
+		leftDrive1.configPeakCurrentLimit(Chassis.chassisDriveMaxCurrentLimit, Chassis.talonTimeOut);
+		leftDrive1.configPeakCurrentDuration(Chassis.chassisDriveMaxCurrentTimeout, Chassis.talonTimeOut);
         
         
         rightDrive1 = new TalonSRX(rightDrive1CanID);
         rightDrive1.setNeutralMode(NeutralMode.Brake);
-		rightDrive1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, Chasis.talonTimeOut);
-		rightDrive1.configPeakCurrentLimit(Chasis.chassisDriveMaxCurrentLimit, Chasis.talonTimeOut);
-		rightDrive1.configPeakCurrentDuration(Chasis.chassisDriveMaxCurrentTimeout, Chasis.talonTimeOut);
+		rightDrive1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, Chassis.talonTimeOut);
+		rightDrive1.configPeakCurrentLimit(Chassis.chassisDriveMaxCurrentLimit, Chassis.talonTimeOut);
+		rightDrive1.configPeakCurrentDuration(Chassis.chassisDriveMaxCurrentTimeout, Chassis.talonTimeOut);
         
         
         
         leftDrive2 = new TalonSRX(leftDrive2CanID);
         leftDrive2.setNeutralMode(NeutralMode.Brake);
-		leftDrive2.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, Chasis.talonTimeOut);
-		leftDrive2.configPeakCurrentLimit(Chasis.chassisDriveMaxCurrentLimit, Chasis.talonTimeOut);
-		leftDrive2.configPeakCurrentDuration(Chasis.chassisDriveMaxCurrentTimeout, Chasis.talonTimeOut);
+		leftDrive2.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, Chassis.talonTimeOut);
+		leftDrive2.configPeakCurrentLimit(Chassis.chassisDriveMaxCurrentLimit, Chassis.talonTimeOut);
+		leftDrive2.configPeakCurrentDuration(Chassis.chassisDriveMaxCurrentTimeout, Chassis.talonTimeOut);
         
         
         rightDrive2 = new TalonSRX(rightDrive2CanID);
         rightDrive2.setNeutralMode(NeutralMode.Brake);
-		rightDrive2.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, Chasis.talonTimeOut);
-		rightDrive2.configPeakCurrentLimit(Chasis.chassisDriveMaxCurrentLimit, Chasis.talonTimeOut);
-		rightDrive2.configPeakCurrentDuration(Chasis.chassisDriveMaxCurrentTimeout, Chasis.talonTimeOut);
+		rightDrive2.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, Chassis.talonTimeOut);
+		rightDrive2.configPeakCurrentLimit(Chassis.chassisDriveMaxCurrentLimit, Chassis.talonTimeOut);
+		rightDrive2.configPeakCurrentDuration(Chassis.chassisDriveMaxCurrentTimeout, Chassis.talonTimeOut);
         
     }
         

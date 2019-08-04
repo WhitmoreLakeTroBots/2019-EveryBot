@@ -27,8 +27,8 @@ public class Intake extends Subsystem {
         intake = new WPI_TalonSRX(5);
         //intake = new TalonSRX(intakeCanID);
     intake.setNeutralMode(NeutralMode.Brake);
-    intake.configPeakCurrentLimit(Chasis.chassisDriveMaxCurrentLimit, Chasis.talonTimeOut);
-    intake.configPeakCurrentDuration(Chasis.chassisDriveMaxCurrentTimeout,  Chasis.talonTimeOut);
+    intake.configPeakCurrentLimit(Chassis.chassisDriveMaxCurrentLimit, Chassis.talonTimeOut);
+    intake.configPeakCurrentDuration(Chassis.chassisDriveMaxCurrentTimeout,  Chassis.talonTimeOut);
    
 
         

@@ -2,13 +2,12 @@ package org.usfirst.frc3668.commands;
 
 import org.usfirst.frc3668.Robot;
 
-
 import edu.wpi.first.wpilibj.command.Command;
 
 public class TeleopCommand extends Command {
 
     public TeleopCommand() {
-        requires(Robot.chasis);
+        requires(Robot.Chassis);
     }
 
     // Called just before this Command runs the first time
@@ -19,7 +18,7 @@ public class TeleopCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        Robot.chasis.Drive(Robot.oi.joyDrive);
+        Robot.Chassis.Drive(Robot.oi.joyDrive);
         
     }
 
@@ -32,7 +31,7 @@ public class TeleopCommand extends Command {
     // Called once after isFinished returns true
     @Override
     protected void end() {
-        Robot.chasis.DriveMan(0, 0);
+        Robot.Chassis.DriveMan(0, 0);
         
     }
 
@@ -40,6 +39,6 @@ public class TeleopCommand extends Command {
     // subsystems is scheduled to run
     @Override
     protected void interrupted() {
-        Robot.chasis.DriveMan(0, 0);
+        Robot.Chassis.DriveMan(0, 0);
     }
 }

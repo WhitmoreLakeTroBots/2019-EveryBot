@@ -6,6 +6,8 @@
 /*----------------------------------------------------------------------------*/
 
 package org.usfirst.frc3668.commands;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import org.usfirst.frc3668.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -18,11 +20,13 @@ public class cmdIntakeFlip extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.pneumatics.doubleFlip(DoubleSolenoid.Value.kOff);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    Robot.pneumatics.doubleFlip(DoubleSolenoid.Value.kForward);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -34,11 +38,13 @@ public class cmdIntakeFlip extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+  Robot.pneumatics.doubleFlip(DoubleSolenoid.Value.kReverse);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+  end();
   }
 }

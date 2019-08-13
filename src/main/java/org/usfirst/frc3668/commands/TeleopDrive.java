@@ -4,9 +4,9 @@ import org.usfirst.frc3668.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class TeleopCommand extends Command {
+public class TeleopDrive extends Command {
 
-    public TeleopCommand() {
+    public TeleopDrive() {
         requires(Robot.Chassis);
     }
 

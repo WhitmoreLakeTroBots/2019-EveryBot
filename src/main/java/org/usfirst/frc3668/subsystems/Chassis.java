@@ -7,7 +7,9 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-
+import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
+import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
+import com.ctre.phoenix.motorcontrol.RemoteLimitSwitchSource;
 import org.usfirst.frc3668.Robot;
 import org.usfirst.frc3668.commands.TeleopCommand;
 
@@ -31,13 +33,14 @@ public class Chassis extends Subsystem {
     public static final int rightDrive1CanID = 3;
     public static final int rightDrive2CanID = 4;
     public static final int leftDrive1CanID = 1;
-    public static final int leftDrive2CanID = 2;
+	public static final int leftDrive2CanID = 2;
     public static boolean isDriveInverted = false;
     public final double joyDriveDeadband = 0.05;
     public final double chassisRightSideScalar = 1;
 	public final double chassisLeftSideScalar = 1;
 	public final boolean chassisSquareJoyInput = true;
 	public final double chassisBeltReduction = 1.0/1.0;
+	
     
 
     public Chassis() {

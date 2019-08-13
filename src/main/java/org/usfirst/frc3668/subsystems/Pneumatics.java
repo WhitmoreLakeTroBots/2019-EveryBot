@@ -46,7 +46,7 @@ public class Pneumatics extends Subsystem {
         
     
      solo = new DoubleSolenoid(0, 1);
-     intakeFlip = new DoubleSolenoid(2, 3);
+     intakeFlip = new DoubleSolenoid(4, 5);
 
     
         

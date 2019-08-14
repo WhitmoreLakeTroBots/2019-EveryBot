@@ -11,7 +11,7 @@ import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.RemoteLimitSwitchSource;
 import org.usfirst.frc3668.Robot;
-import org.usfirst.frc3668.commands.TeleopCommand;
+import org.usfirst.frc3668.commands.TeleopDrive;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
@@ -159,7 +159,7 @@ public class Chassis extends Subsystem {
 
     @Override
     public void initDefaultCommand() {
-       setDefaultCommand(new TeleopCommand());
+       setDefaultCommand(new TeleopDrive());
     }
 
     @Override

@@ -6,7 +6,7 @@ import org.usfirst.frc3668.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 public class CargoDown extends Command {
     public CargoDown (){
-        requires(Robot.CargoFlip);
+        requires(Robot.cargoFLip);
     }
     @Override
     protected void initialize (){
@@ -14,7 +14,7 @@ public class CargoDown extends Command {
     }
     @Override 
     protected void execute (){
-    Robot.CargoFlip.setFlipMotor(-0.3);
+    Robot.cargoFLip.setFlipMotor(-0.3);
     }
     @Override 
     protected boolean isFinished (){
@@ -22,10 +22,10 @@ public class CargoDown extends Command {
     }
     @Override
     protected void end(){
-        Robot.CargoFlip.setFlipMotor(0);
+        Robot.cargoFLip.setFlipMotor(0);
     }
     @Override
     protected void interrupted (){
-        Robot.CargoFlip.setFlipMotor(0);
+        Robot.cargoFLip.setFlipMotor(0);
     }
 }

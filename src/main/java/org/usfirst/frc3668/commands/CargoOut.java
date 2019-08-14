@@ -5,7 +5,7 @@ import org.usfirst.frc3668.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 public class CargoOut extends Command {
     public CargoOut (){
-        requires(Robot.Intake);
+        requires(Robot.intake);
     }
     @Override
     protected void initialize (){
@@ -13,7 +13,7 @@ public class CargoOut extends Command {
     }
     @Override 
     protected void execute (){
-    Robot.Intake.setIntakeMotor(-1);
+    Robot.intake.setIntakeMotor(-1);
     }
     @Override 
     protected boolean isFinished (){
@@ -21,10 +21,10 @@ public class CargoOut extends Command {
     }
     @Override
     protected void end(){
-        Robot.Intake.setIntakeMotor(0);
+        Robot.intake.setIntakeMotor(0);
     }
     @Override
     protected void interrupted (){
-        Robot.Intake.setIntakeMotor(0);
+        Robot.intake.setIntakeMotor(0);
     }
 }

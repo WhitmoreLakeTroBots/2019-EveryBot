@@ -14,7 +14,7 @@ public class CargoDown extends Command {
     }
     @Override 
     protected void execute (){
-    Robot.cargoFLip.setFlipMotor(-0.3);
+    Robot.cargoFLip.setFlipMotor(-1);
     }
     @Override 
     protected boolean isFinished (){

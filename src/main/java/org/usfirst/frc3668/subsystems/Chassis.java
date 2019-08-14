@@ -30,10 +30,10 @@ public class Chassis extends Subsystem {
     public static final int chassisDriveMaxCurrentLimit = 55;
     public static final int talonTimeOut = 10;
     public static final int chassisDriveMaxCurrentTimeout = 500;
-    public static final int rightDrive1CanID = 3;
+    public static final int rightDrive1CanID = 2;
     public static final int rightDrive2CanID = 4;
     public static final int leftDrive1CanID = 1;
-	public static final int leftDrive2CanID = 2;
+	public static final int leftDrive2CanID = 5;
     public static boolean isDriveInverted = false;
     public final double joyDriveDeadband = 0.05;
     public final double chassisRightSideScalar = 1;

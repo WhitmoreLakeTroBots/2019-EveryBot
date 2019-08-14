@@ -20,7 +20,7 @@ public class Intake extends Subsystem {
 
     public Intake() {
         
-        intake = new TalonSRX(5);
+        intake = new TalonSRX(6);
         //intake = new TalonSRX(intakeCanID);
     intake.setNeutralMode(NeutralMode.Brake);
     intake.configPeakCurrentLimit(Chassis.chassisDriveMaxCurrentLimit, Chassis.talonTimeOut);

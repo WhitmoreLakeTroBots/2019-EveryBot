@@ -11,23 +11,29 @@ import org.usfirst.frc3668.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class cmdENTics extends Command {
-  public cmdENTics() {
+public class AutoTurnGyro extends Command {
+  public AutoTurnGyro() {
     // Use requires() here to declare subsystem dependencies
-    
+    // eg. requires(chassis);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.Chassis.resetBothEncoders();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.Chassis.getRightEncoderDist();
-    Robot.Chassis.getLeftEncoderDist();
-    System.err.println("TICS: "+  Robot.Chassis.getRightEncoderDist() +" ,Right " + Robot.Chassis.getLeftEncoderDist()+ "  NAXV: " + Robot.Chassis.navx.getAngle());
+    System.err.println("TICS: "+  Robot.Chassis.getRightEncoderDist() +" ,Right " + Robot.Chassis.getLeftEncoderDist() + "  NAVX: " + Robot.Chassis.navx.getAngle());
+    if(Robot.Chassis.navx.getAngle() < 90){
+      Robot.Chassis.runLeftMotor(0.2);
+      Robot.Chassis.runRightMotor(0.2);
+    }
+    else if (Robot.Chassis.navx.getAngle() >= 84){
+      end();
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -39,6 +45,7 @@ public class cmdENTics extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.Chassis.runMotors(0);
   }
 
   // Called when another command which requires one or more of the same

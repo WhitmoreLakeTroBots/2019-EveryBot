@@ -24,16 +24,8 @@ public class AutonomousCommand extends Command {
   
     @Override
     protected void execute() {
-        System.err.println("TICS: "+  Robot.Chassis.getRightEncoderTics() +" ,Right " + Robot.Chassis.getLeftEncoderTics());
-        
-        if (Robot.Chassis.rightDrive1.getSelectedSensorPosition() < 113 * 100){
-            Robot.Chassis.runMotors(tthrottle);
-        }
-        else if (Robot.Chassis.rightDrive1.getSelectedSensorPosition() >= 113 * 100){
-            Robot.Chassis.runMotors(0);
-        }
-    
-        
+        System.err.println("TICS: "+  Robot.Chassis.getRightEncoderDist() +" ,Right " + Robot.Chassis.getLeftEncoderDist() + "  NAVX: " + Robot.Chassis.navx.getAngle());
+      
     }
 
    
@@ -45,6 +37,7 @@ public class AutonomousCommand extends Command {
    
     @Override
     protected void end() {
+        isFinished();
     }
 
    

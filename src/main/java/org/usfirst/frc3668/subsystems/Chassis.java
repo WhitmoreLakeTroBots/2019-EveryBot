@@ -7,12 +7,15 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.kauailabs.navx.frc.AHRS;
 
 import org.usfirst.frc3668.Robot;
+import org.usfirst.frc3668.Settings;
 import org.usfirst.frc3668.commands.TeleopDrive;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Chassis extends Subsystem {
@@ -36,13 +39,15 @@ public class Chassis extends Subsystem {
 	public final double chassisLeftSideScalar = 0.92;
 	public final boolean chassisSquareJoyInput = true;
 	public final double chassisBeltReduction = 1.0/1.0;
+	public static AHRS navx;
 	
 	
     
 
     public Chassis() {
         
-        PDP = new PowerDistributionPanel(0);
+		PDP = new PowerDistributionPanel(0);
+		navx = new AHRS(SPI.Port.kMXP);
 		
 		
 
@@ -85,18 +90,57 @@ public class Chassis extends Subsystem {
 	public void resetBothEncoders(){
 		resetLeftEncoder();
 		resetRightEncoder();
+		
 	}
+	public void resetNavX(){
+		navx.reset();
+		navx.zeroYaw();
+	}
+	public double getEncoderAvgDistInch() {
+		double retVal = 0;
+		double leftDistance = getLeftEncoderDist();
+		double rightDistance = getRightEncoderDist();
+		if (Math.abs(leftDistance) < 0.5) {
+			retVal = rightDistance;
+		} else if (Math.abs(rightDistance) < 0.5) {
+			retVal = leftDistance;
+		} else {
+			retVal = (leftDistance + rightDistance) / 2;
+		}
+		return retVal;
+	}
+	public double getNavxAngleRaw(){
+		return navx.getAngle();
+	}
+
+	public double getNormaliziedNavxAngle(){
+		return gyroNormalize(getNavxAngleRaw());
+	}
+
 	public void runMotors(double throttle){
 		setLeftMotors(throttle);
 		setRightMotors(-throttle);
 	}
-	public int getRightEncoderTics(){
-		return rightDrive1.getSelectedSensorPosition(0);
+	public int getRightEncoderDist(){
+		return (int)(rightDrive1.getSelectedSensorPosition(0) * Settings.chassisEncoderDistancePerPulse);
 	}
 
-	public int getLeftEncoderTics(){
-		return rightDrive1.getSelectedSensorPosition(0);
+	public int getLeftEncoderDist(){
+		return (int)(rightDrive1.getSelectedSensorPosition(0)* Settings.chassisEncoderDistancePerPulse);
 	}
+	public void runLeftMotor(double throttle){
+		setLeftMotors(throttle);
+	}
+	public void runRightMotor(double throttle){
+		setRightMotors(throttle);
+	}
+	public void runLeftMotorRev(double throttle){
+		setLeftMotors(-throttle);
+	}
+	public void runRightMotorRev(double throttle){
+		setRightMotors(-throttle);
+	}
+
 
 	
 
@@ -183,6 +227,19 @@ public class Chassis extends Subsystem {
 			setRightMotors(rightMotorThrottle);
 		}
 
+	}
+	public double gyroNormalize(double heading){
+		double degrees = heading % 360;
+
+		if (degrees > 180){
+			degrees = degrees -360;
+
+		}
+		if (degrees < -179){
+			degrees = degrees +360;
+
+		}
+		return degrees;
 	}
     
 

@@ -70,7 +70,7 @@ public class MotionProfiler {
 		// we are accellerating
 		else if (time < _accelTime) {
 			msg = "accelerating";
-			//System.out.println(msg);
+			System.out.println(msg);
 			currVel = _initVelocity + (_acceleration * time);
 			_xa = .5 * (_acceleration) * time * time;
 		}

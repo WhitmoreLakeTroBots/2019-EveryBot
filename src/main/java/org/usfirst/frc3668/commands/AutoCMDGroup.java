@@ -7,6 +7,8 @@
 
 package org.usfirst.frc3668.commands;
 
+import org.usfirst.frc3668.Settings;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AutoCMDGroup extends CommandGroup {
@@ -15,7 +17,9 @@ public class AutoCMDGroup extends CommandGroup {
    */
   public AutoCMDGroup() {
 
-    addSequential(new cmdDriveForward(0 , .5, 12));
+    addSequential(new cmdDriveForward(0 , Settings.autoCruiseSpeed, 60));
+    //addSequential(new cmdMotorsZero());
+
    // addSequential(new AutoTurnGyro());
 
     // Add Commands here:
@@ -35,4 +39,4 @@ public class AutoCMDGroup extends CommandGroup {
     // a CommandGroup containing them would require both the chassis and the
     // arm.
   }
-}
+} 

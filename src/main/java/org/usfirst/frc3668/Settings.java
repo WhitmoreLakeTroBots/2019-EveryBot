@@ -13,10 +13,13 @@ package org.usfirst.frc3668;
 public class Settings {
     public static final int ticsPerRev = 4096;
     public static final double chassisEncoderDistancePerPulse = (6 * Math.PI) / ticsPerRev;
-    public static final double chassisMaxInchesPerSecond = 168;
-    public static final double driveKp = 0.1;
-    public static final double driveKi = 0.002;
-    public static final double driveKd = 0.0009;
+    public static final double chassisMaxInchesPerSecond = 25;
+    public static final double driveKp = 0.0;
+    public static final double driveKi = 0.0;
+    public static final double driveKd = 0.0;
     public static final double profileMovementThreshold = 0.75;
     public static final double chassisDriveStraightGyroKp = 0.05;
+    public static final double profileInitVelocity = 0.0;
+    public static final double profileDriveAcceleration = 0;
+    public static final double autoCruiseSpeed = 145;
 }

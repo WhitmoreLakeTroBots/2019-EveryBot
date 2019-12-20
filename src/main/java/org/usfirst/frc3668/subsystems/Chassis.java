@@ -30,9 +30,9 @@ public class Chassis extends Subsystem {
     public static final int talonTimeOut = 10;
     public static final int chassisDriveMaxCurrentTimeout = 500;
     public static final int rightDrive1CanID = 1;
-    public static final int rightDrive2CanID = 5;
-    public static final int leftDrive1CanID = 4;
-	public static final int leftDrive2CanID = 2;
+    public static final int rightDrive2CanID = 3;//5
+    public static final int leftDrive1CanID = 2;
+	public static final int leftDrive2CanID = 4;
     public static boolean isDriveInverted = false;
     public final double joyDriveDeadband = 0.05;
     public final double chassisRightSideScalar = 1;
@@ -54,28 +54,30 @@ public class Chassis extends Subsystem {
         
         
         leftDrive1 = new TalonSRX(leftDrive1CanID);
-        leftDrive1.setNeutralMode(NeutralMode.Brake);
+		leftDrive1.setNeutralMode(NeutralMode.Brake);
 		leftDrive1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, Chassis.talonTimeOut);
 		leftDrive1.configPeakCurrentLimit(Chassis.chassisDriveMaxCurrentLimit, Chassis.talonTimeOut);
 		leftDrive1.configPeakCurrentDuration(Chassis.chassisDriveMaxCurrentTimeout, Chassis.talonTimeOut);
         
         
         rightDrive1 = new TalonSRX(rightDrive1CanID);
-        rightDrive1.setNeutralMode(NeutralMode.Brake);
+		rightDrive1.setNeutralMode(NeutralMode.Brake);
+		rightDrive1.setInverted(true);
 		rightDrive1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, Chassis.talonTimeOut);
 		rightDrive1.configPeakCurrentLimit(Chassis.chassisDriveMaxCurrentLimit, Chassis.talonTimeOut);
 		rightDrive1.configPeakCurrentDuration(Chassis.chassisDriveMaxCurrentTimeout, Chassis.talonTimeOut);
         
         
         
-        leftDrive2 = new TalonSRX(leftDrive2CanID);
+		leftDrive2 = new TalonSRX(leftDrive2CanID);
         leftDrive2.setNeutralMode(NeutralMode.Brake);
 		leftDrive2.configPeakCurrentLimit(Chassis.chassisDriveMaxCurrentLimit, Chassis.talonTimeOut);
 		leftDrive2.configPeakCurrentDuration(Chassis.chassisDriveMaxCurrentTimeout, Chassis.talonTimeOut);
         
         
         rightDrive2 = new TalonSRX(rightDrive2CanID);
-        rightDrive2.setNeutralMode(NeutralMode.Brake);
+		rightDrive2.setNeutralMode(NeutralMode.Brake);
+		rightDrive2.setInverted(true);
 		rightDrive2.configPeakCurrentLimit(Chassis.chassisDriveMaxCurrentLimit, Chassis.talonTimeOut);
 		rightDrive2.configPeakCurrentDuration(Chassis.chassisDriveMaxCurrentTimeout, Chassis.talonTimeOut);
         
@@ -119,7 +121,7 @@ public class Chassis extends Subsystem {
 
 	public void runMotors(double throttle){
 		setLeftMotors(throttle);
-		setRightMotors(-throttle);
+		setRightMotors(throttle);
 	}
 	public int getRightEncoderDist(){
 		return (int)(rightDrive1.getSelectedSensorPosition(0) * Settings.chassisEncoderDistancePerPulse);
@@ -144,7 +146,7 @@ public class Chassis extends Subsystem {
 
 	
 
-    public void Drive(Joystick stick) {
+    public void DriveStick(Joystick stick) {
         double joyX = stick.getX();
         double joyY = stick.getY();
 
@@ -157,34 +159,34 @@ public class Chassis extends Subsystem {
 		double rightMotorThrottle;
 		double leftMotorThrottle;
 		if (Robot.isDriveInverted) {
-			rightMotorThrottle = (joyX + -joyY) * chassisRightSideScalar;
-			leftMotorThrottle = (joyX - -joyY) *  chassisLeftSideScalar;
+			rightMotorThrottle = (joyX + -joyY) * chassisRightSideScalar ;
+			leftMotorThrottle = (joyX - -joyY) *  chassisLeftSideScalar ;
 			
 			if (chassisSquareJoyInput) {
 				double rightSignum = Math.signum(rightMotorThrottle);
 				double leftSignum = Math.signum(leftMotorThrottle);
-				rightMotorThrottle = Math.pow(rightMotorThrottle, 2) * rightSignum;
-				leftMotorThrottle = Math.pow(leftMotorThrottle, 2) * leftSignum;
+				rightMotorThrottle = Math.pow(rightMotorThrottle, 2) * rightSignum ;
+				leftMotorThrottle = Math.pow(leftMotorThrottle, 2) * leftSignum  ;
 				
 			}
             
             setLeftMotors(leftMotorThrottle);
-			setRightMotors(rightMotorThrottle);
+			setRightMotors(-rightMotorThrottle);
 			
 			
 
 		} else {
-			rightMotorThrottle = (joyX - -joyY) * chassisRightSideScalar;
-			leftMotorThrottle = (joyX + -joyY) * chassisLeftSideScalar;
+			rightMotorThrottle = (joyX - -joyY) * chassisRightSideScalar ;
+			leftMotorThrottle = (joyX + -joyY) * chassisLeftSideScalar ;
 			if (chassisSquareJoyInput) {
 				double rightSignum = Math.signum(rightMotorThrottle);
 				double leftSignum = Math.signum(leftMotorThrottle);
-				rightMotorThrottle = Math.pow(rightMotorThrottle, 2) * rightSignum;
-				leftMotorThrottle = Math.pow(leftMotorThrottle, 2) * leftSignum ;
+				rightMotorThrottle = Math.pow(rightMotorThrottle, 2) * rightSignum ;
+				leftMotorThrottle = Math.pow(leftMotorThrottle, 2) * leftSignum;
 			}
 			
 			setLeftMotors(leftMotorThrottle);
-			setRightMotors(rightMotorThrottle);
+			setRightMotors(-rightMotorThrottle);
 			
 		}
 	}
@@ -215,17 +217,16 @@ public class Chassis extends Subsystem {
 	public void Drive(double move, double rotate) {
 		double rightMotorThrottle;
 		double leftMotorThrottle;
-		if (!Robot.isDriveInverted) {
-			rightMotorThrottle = (rotate + move) * chassisRightSideScalar;
-			leftMotorThrottle = (rotate - move) * chassisLeftSideScalar;
-			setLeftMotors(leftMotorThrottle);	
-			setRightMotors(rightMotorThrottle);
-		} else {
+		//if (!Robot.isDriveInverted) {
+		//	rightMotorThrottle = (rotate + move) * chassisRightSideScalar;
+		//	leftMotorThrottle = (rotate - move) * chassisLeftSideScalar;
+		//	setLeftMotors(leftMotorThrottle);	
+		//	setRightMotors(rightMotorThrottle);
 			rightMotorThrottle = (-rotate - move) * chassisRightSideScalar;
 			leftMotorThrottle = (-rotate + move) * chassisLeftSideScalar;
 			setLeftMotors(leftMotorThrottle);
 			setRightMotors(rightMotorThrottle);
-		}
+		
 
 	}
 	public double gyroNormalize(double heading){

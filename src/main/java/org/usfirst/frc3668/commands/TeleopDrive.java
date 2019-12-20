@@ -18,7 +18,7 @@ public class TeleopDrive extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        Robot.Chassis.Drive(Robot.oi.joyDrive);
+        Robot.Chassis.DriveStick(Robot.oi.joyDrive);
     
     }
 

@@ -8,6 +8,9 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import org.usfirst.frc3668.Robot;
 import org.usfirst.frc3668.Settings;
@@ -40,6 +43,11 @@ public class Chassis extends Subsystem {
 	public final boolean chassisSquareJoyInput = true;
 	public final double chassisBeltReduction = 1.0/1.0;
 	public static AHRS navx;
+
+	public static CANSparkMax sparkOne;
+	public static CANSparkMax sparkTwo;
+	public static int sparkTwoCanID = 7;
+	public static int sparkOneCanID = 6;
 	
 	
     
@@ -49,10 +57,6 @@ public class Chassis extends Subsystem {
 		PDP = new PowerDistributionPanel(0);
 		navx = new AHRS(SPI.Port.kMXP);
 		
-		
-
-        
-        
         leftDrive1 = new TalonSRX(leftDrive1CanID);
 		leftDrive1.setNeutralMode(NeutralMode.Brake);
 		leftDrive1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, Chassis.talonTimeOut);
@@ -80,7 +84,10 @@ public class Chassis extends Subsystem {
 		rightDrive2.setInverted(true);
 		rightDrive2.configPeakCurrentLimit(Chassis.chassisDriveMaxCurrentLimit, Chassis.talonTimeOut);
 		rightDrive2.configPeakCurrentDuration(Chassis.chassisDriveMaxCurrentTimeout, Chassis.talonTimeOut);
-        
+		
+		sparkOne = new CANSparkMax(sparkOneCanID, MotorType.kBrushless);
+		sparkOne.setIdleMode(IdleMode.kBrake);
+
     }
 		
 	public void resetLeftEncoder(){
@@ -142,6 +149,13 @@ public class Chassis extends Subsystem {
 	public void runRightMotorRev(double throttle){
 		setRightMotors(-throttle);
 	}
+	public void runLeftNeo(double throttle){
+		sparkOne.set(throttle);
+	}
+	public void runRightNeo(double throttle){
+		sparkTwo.set(throttle);
+	}
+	
 
 
 	
@@ -172,6 +186,8 @@ public class Chassis extends Subsystem {
             
             setLeftMotors(leftMotorThrottle);
 			setRightMotors(-rightMotorThrottle);
+			runLeftNeo(leftMotorThrottle);
+			runRightNeo(-rightMotorThrottle);
 			
 			
 
@@ -187,6 +203,8 @@ public class Chassis extends Subsystem {
 			
 			setLeftMotors(leftMotorThrottle);
 			setRightMotors(-rightMotorThrottle);
+			runLeftNeo(leftMotorThrottle);
+			runRightNeo(-rightMotorThrottle);
 			
 		}
 	}

@@ -16,7 +16,7 @@ import org.usfirst.frc3668.motionProfile.MotionProfiler;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class cmdDriveForward extends Command {
-  public final double ticsToIn = 100;
+  //public final double ticsToIn = 100;
   //public final double throttle = 0.32;
   private double _distance;
   private MotionProfiler mp;
